@@ -26,6 +26,9 @@ def parse_product(product: Tag, category: str):
     temp["url_to_product"] = product.select_one(
         ".product_box > a")["href"]
     temp["category"] = category
+    if product.select_one(".price_discount > span"):
+        temp["prev_price"] = product.select_one(
+            ".price_discount > span").text.strip()
     if product.select_one(".size"):
         temp["size"] = product.select_one(".size").text
     return temp
