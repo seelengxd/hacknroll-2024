@@ -31,6 +31,7 @@ class Listing(db.Model):
     price: Mapped[float]
     offer_qty: Mapped[Optional[int]]
     offer_price: Mapped[Optional[float]]
+    offer_display: Mapped[Optional[str]]
     url_to_product: Mapped[str]
 
     product: Mapped[Product] = relationship(back_populates="listings")
