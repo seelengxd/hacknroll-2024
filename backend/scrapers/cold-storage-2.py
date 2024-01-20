@@ -2,6 +2,9 @@ import requests
 import json
 from bs4 import BeautifulSoup, Tag
 
+CATEGORIES = ["delicatessen", "our-exclusive-brands", "mum-baby", "health-beauty", "home-kitchen-cleaning", "meat-seafood", "fruits-vegetables", "snacks-drinks", "ready-meals",
+              "dairy-chilled-frozen", "bakery-cereal-spreads", "beers-wines-spirits", "food-pantry", "organic-sustainable"]  # "art-kit-sale", "australia-fair", "organic-produce"]
+
 
 def get_url(category, page_number=1):
     return f"https://coldstorage.com.sg/{category}/?Product_page={page_number}"
@@ -23,18 +26,15 @@ def parse_product(product: Tag, category: str):
     temp["url_to_product"] = product.select_one(
         ".product_box > a")["href"]
     temp["category"] = category
+    if product.select_one(".size"):
+        temp["size"] = product.select_one(".size").text
     return temp
-    # name
 
 
 def scrape(category):
     first = requests.get(get_url(category))
-    # <li class="last"><a href="/fruits-vegetables/?Product_page=11">
 
     soup = BeautifulSoup(first.text, features="html.parser")
-    print(soup)
-    print(soup.select_one(".last > a"))
-    print(soup.select_one(".last > a")['href'])
     page_limit = int(soup.select_one(".last > a")['href'].split("=")[-1])
     data = []
     for i in range(1, page_limit + 1):
@@ -47,4 +47,8 @@ def scrape(category):
 
 
 with open("cs.json", "w") as f:
-    json.dump(scrape("fruits-vegetables"), f)
+    data = {}
+    for category in CATEGORIES:
+        print("Scraping Category:", category)
+        data[category] = scrape(category)
+    json.dump(data, f)
