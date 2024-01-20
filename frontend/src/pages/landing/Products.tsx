@@ -17,17 +17,19 @@ const Products = ({
 }: ProductsProps) => {
   return (
     <>
-      <Row style={{ width: "100%", height: "100%" }}>
+      <Row style={{ width: "100%", height: "100%", justifyContent: "center" }}>
         {filteredProducts.map((product, index) => (
           <ProductCard product={product} key={index} />
         ))}
       </Row>
-      <Pagination
-        current={currentPageNumber}
-        onChange={(page) => setPageNumber(page)}
-        defaultPageSize={30}
-        total={totalItems}
-      />
+      <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+        <Pagination
+          current={currentPageNumber}
+          onChange={(page) => setPageNumber(page)}
+          defaultPageSize={30}
+          total={totalItems}
+        />
+      </div>
     </>
   );
 };

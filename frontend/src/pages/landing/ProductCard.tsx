@@ -24,14 +24,14 @@ const ProductCard = ({ product }: ProductProps) => {
         style={{ width: 300, position: "absolute" }}
         cover={
           <Carousel autoplay>
-            {product.imageUrl.map((url, index) => (
+            {product.imageUrl?.map((url, index) => (
               <Image
                 key={index}
                 src={url}
                 alt={"Image Not Found"}
                 height={300}
               />
-            ))}
+            )) ?? []}
           </Carousel>
         }
         actions={[]}

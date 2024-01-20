@@ -51,10 +51,16 @@ const ProductContent = () => {
         <>
           <Col span={12}>
             <Carousel>
-              {product &&
-                product.imageUrl.map((url, index) => (
-                  <Image key={index} src={url} width={"100%"} />
-                ))}
+              {(product &&
+                product.imageUrl?.map((url, index) => (
+                  <Image
+                    key={index}
+                    src={url}
+                    width={"100%"}
+                    alt="Image not found."
+                  />
+                ))) ??
+                []}
             </Carousel>
           </Col>
           <Col span={12}>

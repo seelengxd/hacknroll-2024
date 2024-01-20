@@ -49,7 +49,7 @@ const LandingContent = () => {
       />
       <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
         <Input
-          style={{ width: "70%", marginTop: -48, borderRadius: 10 }}
+          style={{ width: "50%", marginTop: -48, borderRadius: 10 }}
           placeholder="Search Product..."
           onChange={inputChangeHandler}
           value={inputValue}

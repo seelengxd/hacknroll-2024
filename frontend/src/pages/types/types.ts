@@ -2,7 +2,7 @@ export type ProductItem = {
   id: number;
   label: string;
   measureField: string;
-  imageUrl: string[];
+  imageUrl?: string[];
   merchants: Merchant[];
 };
 
@@ -13,7 +13,7 @@ export type Merchant = {
   link: string;
 };
 
-export type MerchantName = "NTUC" | "Cold Storage" | "Sheng Siong" | "RedMart";
+export type MerchantName = "NTUC" | "Cold Storage" | "Sheng Shiong";
 
 export type MerchantMapType = {
   [key in MerchantName]: MerchantType;

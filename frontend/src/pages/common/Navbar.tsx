@@ -11,6 +11,7 @@ const Navbar = () => {
         width: "100%",
         display: "flex",
         alignItems: "center",
+        backgroundColor: "#1A43BF",
       }}
     >
       <HomeLogo />

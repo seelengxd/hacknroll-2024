@@ -42,6 +42,5 @@ const ShengSiongLogo = () => {
 export const MerchantNameMap: MerchantMapType = {
   NTUC: { label: "FairPrice", image: <NTUCLogo /> },
   "Cold Storage": { label: "Cold Storage", image: <ColdStorageLogo /> },
-  "Sheng Siong": { label: "Sheng Siong", image: <ShengSiongLogo /> },
-  RedMart: { label: "RedMart", image: <ShengSiongLogo /> },
+  "Sheng Shiong": { label: "Sheng Siong", image: <ShengSiongLogo /> },
 };

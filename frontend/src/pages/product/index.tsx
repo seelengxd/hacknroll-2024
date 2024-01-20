@@ -1,6 +1,6 @@
 import { Layout } from "antd";
 import { Footer } from "antd/es/layout/layout";
-import ProductContent from "./Content";
+import ProductContent from "./content";
 import Navbar from "../common/Navbar";
 
 const Product = () => {
