@@ -42,6 +42,7 @@ class Merchant(db.Model):
 
 
 class Listing(db.Model):
+    id: Mapped[int] = mapped_column(primary_key=True)
     product_id: Mapped[int] = mapped_column(
         ForeignKey("product.id"), primary_key=True)
     merchant_id: Mapped[int] = mapped_column(
