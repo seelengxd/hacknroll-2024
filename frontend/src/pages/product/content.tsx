@@ -6,62 +6,69 @@ import {
   CollapseProps,
   Image,
   Row,
+  Spin,
   Typography,
 } from "antd";
 import { Merchant, ProductItem } from "../types/types";
 import _ from "lodash";
 import { MerchantNameMap } from "../../utils/utils";
-
-const dummyProduct: ProductItem = {
-  id: 2,
-  label: "Wang Wang",
-  measureField: "92g",
-  imageUrl: [
-    "https://assets.lyreco.com/is/image/lyrecows/2018-13235431?locale=SG_en&id=VXFq51&fmt=jpg&dpr=off&fit=constrain,1&wid=430&hei=430",
-    "https://img.ws.mms.shopee.sg/26c47d8c291de922a082b09b2540e306",
-  ],
-  merchants: [
-    {
-      name: "ntuc",
-      price: 1.8,
-      offer: "Buy 3 and get 1 FREE!",
-      link: "https://www.google.com",
-    },
-    {
-      name: "coldstorage",
-      price: 1.4,
-      link: "https://www.google.com",
-    },
-    {
-      name: "shengsiong",
-      price: 1.8,
-      offer: "Buy 2 and get 50% OFF on the 3rd",
-      link: "https://www.google.com",
-    },
-  ],
-};
+import { useQuery } from "@tanstack/react-query";
+import { getItem } from "../../api/api";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import NoData from "../landing/NoData";
 
 const ProductContent = () => {
   // Fetch Product by ID (TO BE IMPLEMENTED)
+  const location = useLocation();
+  const pathName = location.pathname.split("/");
+  const productId =
+    pathName.length !== 0 ? Number(pathName[pathName.length - 1]) : -1;
 
-  const product = dummyProduct;
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["getItem"],
+    queryFn: () => getItem(productId),
+  });
+
+  if (error) {
+    console.error(error);
+  }
+
+  useEffect(() => {
+    if (data === undefined) return;
+    setProduct(data.data);
+  }, [data]);
+
+  const [product, setProduct] = useState<ProductItem>();
 
   return (
     <Row>
-      <Col span={12}>
-        <Carousel>
-          {product.imageUrl.map((url, index) => (
-            <Image key={index} src={url} width={"100%"} />
-          ))}
-        </Carousel>
-      </Col>
-      <Col span={12}>
-        <div style={{ margin: 30 }}>
-          <Typography.Title>{product.label}</Typography.Title>
-          <Typography.Text>{`Measured Unit: ${product.measureField}`}</Typography.Text>
-          <MerchantDetails merchants={product.merchants} />
-        </div>
-      </Col>
+      {isLoading ? (
+        <Spin />
+      ) : (
+        <>
+          <Col span={12}>
+            <Carousel>
+              {product &&
+                product.imageUrl.map((url, index) => (
+                  <Image key={index} src={url} width={"100%"} />
+                ))}
+            </Carousel>
+          </Col>
+          <Col span={12}>
+            <div style={{ margin: 30 }}>
+              {product && (
+                <>
+                  <Typography.Title>{product.label}</Typography.Title>
+                  <Typography.Text>{`Measured Unit: ${product.measureField}`}</Typography.Text>
+                  <MerchantDetails merchants={product.merchants} />
+                </>
+              )}
+            </div>
+          </Col>
+          {!product && <NoData />}
+        </>
+      )}
     </Row>
   );
 };

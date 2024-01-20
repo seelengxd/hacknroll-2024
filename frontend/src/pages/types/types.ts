@@ -13,7 +13,7 @@ export type Merchant = {
   link: string;
 };
 
-export type MerchantName = "ntuc" | "coldstorage" | "shengsiong";
+export type MerchantName = "NTUC" | "Cold Storage" | "Sheng Siong" | "RedMart";
 
 export type MerchantMapType = {
   [key in MerchantName]: MerchantType;

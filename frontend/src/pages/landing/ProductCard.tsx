@@ -26,7 +26,12 @@ const ProductCard = ({ product }: Props) => {
         cover={
           <Carousel autoplay>
             {product.imageUrl.map((url, index) => (
-              <Image key={index} src={url} />
+              <Image
+                key={index}
+                src={url}
+                alt={"Image Not Found"}
+                height={300}
+              />
             ))}
           </Carousel>
         }
