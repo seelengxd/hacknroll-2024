@@ -3,7 +3,7 @@ from flask_cors import CORS
 
 from .models.db import db, add_db_setup_commands
 
-from .blueprints.items import ItemList, Item
+from .blueprints.items import ItemList, Item, SearchItems
 from flask_restful import Api
 
 
@@ -21,5 +21,6 @@ def create_app():
 
     api.add_resource(ItemList, "/items")
     api.add_resource(Item, "/items/<int:id>")
+    api.add_resource(SearchItems, "/search")
 
     return app
