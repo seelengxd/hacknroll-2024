@@ -35,7 +35,13 @@ def add_db_setup_commands(app: Flask):
                             description="desc 1", image_url="www.url.com", size="whatever")
         product_b = Product(name="B", brand="brand B",
                             description="desc 2", image_url="www.url.com", size="whatever")
-        products = [product_a, product_b]
+        product_c = Product(name="C", brand="brand C",
+                            description="desc 3", image_url="www.url.com", size="whatever")
+        product_d = Product(name="D", brand="brand D",
+                            description="desc 4", image_url="www.url.com", size="whatever")
+        product_e = Product(name="E", brand="brand E",
+                            description="desc 5", image_url="www.url.com", size="whatever")
+        products = [product_a, product_b, product_c, product_d, product_e]
 
         merchant_a = Merchant(name="NTUC")
         merchant_b = Merchant(name="Cold Storage")
