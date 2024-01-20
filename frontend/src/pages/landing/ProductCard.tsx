@@ -16,7 +16,10 @@ type LogoProps = {
 
 const ProductCard = ({ product }: Props) => {
   const navigate = useNavigate();
-  const hasOffer = _.some(product.merchants, (m) => _.has(m, "offer"));
+  const hasOffer = _.some(
+    product.merchants,
+    (m) => m.offer !== null && _.has(m, "offer")
+  );
 
   return (
     <Col style={{ width: 300, height: 400, position: "relative", margin: 12 }}>

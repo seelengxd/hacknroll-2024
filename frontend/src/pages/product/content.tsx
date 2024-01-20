@@ -7,6 +7,7 @@ import {
   Image,
   Row,
   Spin,
+  Tag,
   Typography,
 } from "antd";
 import { Merchant, ProductItem } from "../types/types";
@@ -78,6 +79,10 @@ interface MerchantDetailsProps {
 }
 
 const MerchantDetails = ({ merchants }: MerchantDetailsProps) => {
+  const mostAffordableMerchant = merchants.sort(
+    (m1, m2) => m1.price - m2.price
+  )[0].name;
+
   const merchantsToCollapseItems = (
     merchants: Merchant[]
   ): CollapseProps["items"] => {
@@ -85,15 +90,22 @@ const MerchantDetails = ({ merchants }: MerchantDetailsProps) => {
       key: m.name,
       label: <MerchantLabel merchant={m} />,
       children: <MerchantDetailsChildren merchant={m} />,
-      extra: <div>{`${m.price} / unit`}</div>,
+      extra: mostAffordableMerchant == m.name ? <MostAffordableTag /> : null,
     }));
   };
 
   return (
     <div style={{ marginTop: 12 }}>
-      <Collapse items={merchantsToCollapseItems(merchants)} />
+      <Collapse
+        items={merchantsToCollapseItems(merchants)}
+        defaultActiveKey={[mostAffordableMerchant]}
+      />
     </div>
   );
+};
+
+const MostAffordableTag = () => {
+  return <Tag color="#87d068">Most Affordable</Tag>;
 };
 
 interface MerchantDetailChildrenProps {
@@ -129,7 +141,13 @@ const MerchantLabel = ({ merchant }: MerchantDetailChildrenProps) => {
 const MerchantDetailsChildren = ({ merchant }: MerchantDetailChildrenProps) => {
   return (
     <>
-      <div style={{ paddingBottom: 8 }}>
+      <div
+        style={{
+          paddingBottom: 8,
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         <Button
           href={merchant.link}
           target="_blank"
@@ -137,6 +155,7 @@ const MerchantDetailsChildren = ({ merchant }: MerchantDetailChildrenProps) => {
         >
           Product Link
         </Button>
+        {`$${merchant.price}`}
       </div>
       {merchant.offer && (
         <Typography.Paragraph>{merchant.offer}</Typography.Paragraph>
