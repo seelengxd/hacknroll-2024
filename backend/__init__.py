@@ -2,7 +2,7 @@ from flask import Flask
 
 from .models.db import db, add_db_setup_commands
 
-from .blueprints.items import ItemList
+from .blueprints.items import ItemList, Item
 from flask_restful import Api
 
 
@@ -18,5 +18,6 @@ def create_app():
     api = Api(app)
 
     api.add_resource(ItemList, "/items")
+    api.add_resource(Item, "/items/<int:id>")
 
     return app

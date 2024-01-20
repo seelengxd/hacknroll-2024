@@ -24,6 +24,15 @@ class Product(db.Model):
     listings: Mapped[List["Listing"]] = relationship(back_populates="product")
     barcodes: Mapped[List[Barcode]] = relationship(back_populates="product")
 
+    def as_dict(self):
+        return {
+            "id": self.id,
+            "label": self.name,
+            "measureField": self.size,
+            "imageUrl": [self.image_url],
+            "merchants": [listing.as_dict() for listing in self.listings]
+        }
+
 
 class Merchant(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -45,3 +54,11 @@ class Listing(db.Model):
 
     product: Mapped[Product] = relationship(back_populates="listings")
     merchant: Mapped[Merchant] = relationship(back_populates="listings")
+
+    def as_dict(self):
+        return {
+            "name": self.merchant.name,
+            "price": self.price,
+            "offer": self.offer_display,
+            "link": self.url_to_product
+        }
