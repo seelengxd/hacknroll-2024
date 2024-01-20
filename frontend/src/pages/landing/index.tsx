@@ -1,6 +1,6 @@
 import { Layout } from "antd";
 import { Footer, Header } from "antd/es/layout/layout";
-import LandingContent from "./content";
+import LandingContent from "./Content";
 import HomeLogo from "../common/HomeLogo";
 
 const Landing = () => {

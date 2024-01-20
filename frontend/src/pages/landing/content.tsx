@@ -31,8 +31,6 @@ const LandingContent = () => {
     setFilteredProducts(filterProducts(input));
   };
 
-  console.log(filteredProducts);
-
   const filterProducts = (input: string) => {
     return _.filter(
       data.data,

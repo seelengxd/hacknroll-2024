@@ -2,19 +2,15 @@ import _ from "lodash";
 import { Card, Carousel, Col, Image, Typography } from "antd";
 import Meta from "antd/es/card/Meta";
 
-import { MerchantName, ProductItem } from "../types/types";
-import { MerchantNameMap } from "../../utils/utils";
+import { ProductItem } from "../types/types";
 import { useNavigate } from "react-router-dom";
+import CardDescription from "./CardDescription";
 
-type Props = {
+export type ProductProps = {
   product: ProductItem;
 };
 
-type LogoProps = {
-  name: MerchantName;
-};
-
-const ProductCard = ({ product }: Props) => {
+const ProductCard = ({ product }: ProductProps) => {
   const navigate = useNavigate();
   const hasOffer = _.some(
     product.merchants,
@@ -65,32 +61,6 @@ const ProductCard = ({ product }: Props) => {
       )}
     </Col>
   );
-};
-
-const CardDescription = ({ product }: Props) => {
-  const lowestPrice = Math.min(..._.map(product.merchants, (m) => m.price));
-  const availableMerchantNames = _.map(product.merchants, (m) => m.name);
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <div>
-        {availableMerchantNames.map((n) => (
-          <LogoAvailability name={n} key={n} />
-        ))}
-      </div>
-      <div>{`Lowest @$${lowestPrice}`}</div>
-    </div>
-  );
-};
-
-const LogoAvailability = ({ name }: LogoProps) => {
-  return MerchantNameMap[name].image;
 };
 
 export default ProductCard;

@@ -23,3 +23,7 @@ type MerchantType = {
   label: string;
   image: JSX.Element;
 };
+
+export interface MerchantDetailChildrenProps {
+  merchant: Merchant;
+}

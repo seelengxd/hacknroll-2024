@@ -1,5 +1,4 @@
 import {
-  Button,
   Carousel,
   Col,
   Collapse,
@@ -7,17 +6,19 @@ import {
   Image,
   Row,
   Spin,
-  Tag,
   Typography,
 } from "antd";
 import { Merchant, ProductItem } from "../types/types";
 import _ from "lodash";
-import { MerchantNameMap } from "../../utils/utils";
+
 import { useQuery } from "@tanstack/react-query";
 import { getItem } from "../../api/api";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NoData from "../landing/NoData";
+import MerchantLabel from "./MerchantLabel";
+import MerchantDetailsChildren from "./MerchantDetailsChildren";
+import MostAffordableTag from "./MostAffordableTag";
 
 const ProductContent = () => {
   // Fetch Product by ID (TO BE IMPLEMENTED)
@@ -90,7 +91,7 @@ const MerchantDetails = ({ merchants }: MerchantDetailsProps) => {
       key: m.name,
       label: <MerchantLabel merchant={m} />,
       children: <MerchantDetailsChildren merchant={m} />,
-      extra: mostAffordableMerchant == m.name ? <MostAffordableTag /> : null,
+      extra: mostAffordableMerchant === m.name ? <MostAffordableTag /> : null,
     }));
   };
 
@@ -101,66 +102,6 @@ const MerchantDetails = ({ merchants }: MerchantDetailsProps) => {
         defaultActiveKey={[mostAffordableMerchant]}
       />
     </div>
-  );
-};
-
-const MostAffordableTag = () => {
-  return <Tag color="#87d068">Most Affordable</Tag>;
-};
-
-interface MerchantDetailChildrenProps {
-  merchant: Merchant;
-}
-
-const MerchantLabel = ({ merchant }: MerchantDetailChildrenProps) => {
-  const mappedMerchant = MerchantNameMap[merchant.name];
-
-  return (
-    <div
-      style={{ display: "flex", justifyContent: "start", alignItems: "center" }}
-    >
-      {mappedMerchant.image}
-      <div style={{ margin: "0 8px" }}>{mappedMerchant.label}</div>
-      {merchant.offer && (
-        <Typography.Text
-          style={{
-            backgroundColor: "#FFA500",
-            color: "#fff",
-            fontSize: 10,
-            padding: "2px 6px",
-            borderRadius: 2,
-          }}
-        >
-          Offer
-        </Typography.Text>
-      )}
-    </div>
-  );
-};
-
-const MerchantDetailsChildren = ({ merchant }: MerchantDetailChildrenProps) => {
-  return (
-    <>
-      <div
-        style={{
-          paddingBottom: 8,
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <Button
-          href={merchant.link}
-          target="_blank"
-          style={{ backgroundColor: "#1A43BF", color: "#fff" }}
-        >
-          Product Link
-        </Button>
-        {`$${merchant.price}`}
-      </div>
-      {merchant.offer && (
-        <Typography.Paragraph>{merchant.offer}</Typography.Paragraph>
-      )}
-    </>
   );
 };
 

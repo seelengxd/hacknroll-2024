@@ -1,7 +1,7 @@
 import { Layout } from "antd";
 import { Footer, Header } from "antd/es/layout/layout";
 import HomeLogo from "../common/HomeLogo";
-import ProductContent from "./content";
+import ProductContent from "./Content";
 
 const Product = () => {
   return (
