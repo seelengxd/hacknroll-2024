@@ -13,7 +13,7 @@ db = SQLAlchemy(model_class=Base)
 
 def add_db_setup_commands(app: Flask):
     def init_db():
-        from .item import Product, Merchant, Listing
+        from .item import Product, Merchant, Listing, Barcode
         with app.app_context():
             db.create_all()
 

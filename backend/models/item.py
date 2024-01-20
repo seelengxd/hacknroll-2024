@@ -4,16 +4,25 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 
+class Barcode(db.Model):
+    id: Mapped[int] = mapped_column(primary_key=True)
+    product_id: Mapped[int] = mapped_column(
+        ForeignKey("product.id"))
+    value: Mapped[str]
+
+    product: Mapped["Product"] = relationship(back_populates="barcodes")
+
+
 class Product(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]
     brand: Mapped[str]
     description: Mapped[Optional[str]]
     image_url: Mapped[str]
-    barcode: Mapped[int] = mapped_column(unique=True)
-    size: Mapped[str] = mapped_column()
+    size: Mapped[str]
 
     listings: Mapped[List["Listing"]] = relationship(back_populates="product")
+    barcodes: Mapped[List[Barcode]] = relationship(back_populates="product")
 
 
 class Merchant(db.Model):
