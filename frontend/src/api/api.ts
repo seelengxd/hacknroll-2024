@@ -26,8 +26,12 @@ export const getItem = async (id: number) => {
   }
 };
 
-export const searchItems = async (input: string, pageNumber: number) => {
-  let url = `${apiEndpoint}/search?page=${pageNumber}`;
+export const searchItems = async (
+  input: string,
+  pageNumber: number,
+  filteredPrice: number[]
+) => {
+  let url = `${apiEndpoint}/search?page=${pageNumber}&start=${filteredPrice[0]}&end=${filteredPrice[1]}`;
   if (input !== "") {
     url += `&q=${encodeURIComponent(input)}`;
   }
