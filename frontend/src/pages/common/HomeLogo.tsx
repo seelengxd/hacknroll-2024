@@ -15,7 +15,7 @@ const HomeLogo = () => {
         style={{ backgroundColor: "#ffffff", fontSize: 32, marginRight: 8 }}
       />
       <div onClick={() => navigate("/")} style={fontStyle}>
-        programming bodohs
+        Price Chop Chop
       </div>
     </>
   );
