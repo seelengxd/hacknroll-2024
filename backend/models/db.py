@@ -32,7 +32,7 @@ def add_db_setup_commands(app: Flask):
         Merchant.query.delete()
 
         import json
-        with open("whatever2.json") as f:
+        with open("whatever4.json") as f:
             data = json.load(f)
         # OLD MAIN
         # =====================
