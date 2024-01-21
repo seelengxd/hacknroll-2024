@@ -28,6 +28,7 @@ const Products = ({
           onChange={(page) => setPageNumber(page)}
           defaultPageSize={30}
           total={totalItems}
+          showSizeChanger={false}
         />
       </div>
     </>
