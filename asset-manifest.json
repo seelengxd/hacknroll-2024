@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.js": "/hacknroll-2024/static/js/main.01f82337.js",
+    "main.js": "/hacknroll-2024/static/js/main.9d251092.js",
     "static/js/787.9e9f4ffd.chunk.js": "/hacknroll-2024/static/js/787.9e9f4ffd.chunk.js",
     "static/media/landing-image.jpeg": "/hacknroll-2024/static/media/landing-image.597a1c3f8a89f1ea2183.jpeg",
     "static/media/shengsiong-logo.png": "/hacknroll-2024/static/media/shengsiong-logo.fb25ebeaf9efff4d9c98.png",
     "static/media/unknown-logo.jpg": "/hacknroll-2024/static/media/unknown-logo.d43f2ffb7c37e1f89ec2.jpg",
     "static/media/home-logo.svg": "/hacknroll-2024/static/media/home-logo.9f10fba81754e57f76acfa7a0e0494c7.svg",
     "index.html": "/hacknroll-2024/index.html",
-    "main.01f82337.js.map": "/hacknroll-2024/static/js/main.01f82337.js.map",
+    "main.9d251092.js.map": "/hacknroll-2024/static/js/main.9d251092.js.map",
     "787.9e9f4ffd.chunk.js.map": "/hacknroll-2024/static/js/787.9e9f4ffd.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.01f82337.js"
+    "static/js/main.9d251092.js"
   ]
 }
